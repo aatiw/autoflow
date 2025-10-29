@@ -1,20 +1,11 @@
-"use client"
+import { requireAuth } from "@/lib/auth-utils";
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { useTRPC } from "@/trpc/client";
-import { useQuery } from "@tanstack/react-query";
-
-const Page = () => {
-  const trpc = useTRPC();
-  const {data:users} = useQuery(trpc.getUsers.queryOptions());
-  const something = true;
+const Page = async () => {
+  await requireAuth();
 
   return (
-    <div className={cn("text-red-500 font-extrabold", something === true && "text-green-500")}>
-      <Button>
-        click me
-      </Button>
+    <div className="min-h-screen min-w-scren items-center justify-center">
+      protected server component
     </div>
   );
 };
